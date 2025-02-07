@@ -12,12 +12,13 @@ in
 				anyrun
 				fastfetch
 				oh-my-posh
-				firefox
 				neovim
 				zsh
 			];
 		};
 		programs = {
+			chromium.enable = true;
+			firefox.enable = true;
 			ghostty = {
 				enable = true;
 				settings = {

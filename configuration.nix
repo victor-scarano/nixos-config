@@ -9,7 +9,7 @@
 
 	# system packages
 	programs.hyprland.enable = true;
-	environment.systemPackages = with pkgs; [ btop gcc gh git gparted libgcc polkit polkit_gnome stow ];
+	environment.systemPackages = with pkgs; [ btop gcc gh git gparted kdePackages.breeze libgcc polkit polkit_gnome rustup stow tree ];
 
 	# shell config
 	programs.zsh.enable = true;
@@ -21,7 +21,7 @@
 		description = "Victor";
 		extraGroups = [ "networkmanager" "wheel" ];
 		shell = pkgs.zsh;
-		packages = with pkgs; [ discord-canary github-desktop spotify ];
+		packages = with pkgs; [ discord-canary gimp github-desktop spotify ];
 	};
 
 	boot.loader = {
@@ -42,9 +42,11 @@
 	security.rtkit.enable = true;
 	services.pipewire = {
 		enable = true;
+		audio.enable = true;
 		alsa.enable = true;
 		alsa.support32Bit = true;
 		pulse.enable = true;
+		jack.enable = true;
 	};
 
 	# enable daemons and services
