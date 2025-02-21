@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
-	imports = [ ./hardware-configuration.nix ./home.nix ];
+	imports = [
+		./hardware-configuration.nix
+		# ./home.nix
+	];
 
 	# enable flakes
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -9,11 +12,27 @@
 
 	# system packages
 	programs.hyprland.enable = true;
-	environment.systemPackages = with pkgs; [ btop gcc gh git gparted kdePackages.breeze libgcc polkit polkit_gnome rustup stow tree ];
-
-	# shell config
-	programs.zsh.enable = true;
-	environment.shells = [ pkgs.zsh ];
+	environment.systemPackages = with pkgs; [
+		btop
+		gcc
+		gh
+		ghostty
+		git
+		gparted # must be installed as a system package
+		kdePackages.breeze
+		libgcc
+		oh-my-posh
+		polkit
+		polkit_gnome
+		ripgrep
+		rustup
+		sbctl
+		stow
+		tree
+		vlc
+		wget
+		# zsh
+	];
 
 	# user config
 	users.users.victor = {
@@ -21,16 +40,44 @@
 		description = "Victor";
 		extraGroups = [ "networkmanager" "wheel" ];
 		shell = pkgs.zsh;
-		packages = with pkgs; [ discord-canary gimp github-desktop spotify ];
+		packages = with pkgs; [
+			anyrun
+			discord-canary
+			fastfetch
+			firefox
+			gimp
+			github-desktop
+			google-chrome
+			grim
+			kitty
+			neovim
+			obsidian
+			rust-analyzer
+			slurp
+			spotify
+			swww
+			waypaper
+			wl-clipboard
+		];
 	};
 
+	# shell config
+	programs.zsh.enable = true;
+	environment.shells = [ pkgs.zsh ];
+
+	# bootloader config
 	boot.loader = {
 		systemd-boot = {
-			enable = true;
+			# enable = true;
+			enable = lib.mkForce false;
 			consoleMode = "max";
 		};
 		efi.canTouchEfiVariables = true;
 		timeout = 10;
+	};
+	boot.lanzaboote = {
+		enable = true;
+		pkiBundle = "/var/lib/sbctl";
 	};
 
 	# networking config
