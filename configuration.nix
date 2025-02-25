@@ -1,10 +1,7 @@
 { config, pkgs, lib, inputs, ... }:
 
 {
-	imports = [
-		./hardware-configuration.nix
-		# ./home.nix
-	];
+	imports = [ ./hardware-configuration.nix ];
 
 	# enable flakes
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -13,25 +10,15 @@
 	# system packages
 	programs.hyprland.enable = true;
 	environment.systemPackages = with pkgs; [
-		btop
 		gcc
-		gh
-		ghostty
 		git
 		gparted # must be installed as a system package
 		kdePackages.breeze
 		libgcc
-		oh-my-posh
 		polkit
 		polkit_gnome
-		ripgrep
-		rustup
 		sbctl
-		stow
-		tree
-		vlc
 		wget
-		# zsh
 	];
 
 	# user config
@@ -40,25 +27,6 @@
 		description = "Victor";
 		extraGroups = [ "networkmanager" "wheel" ];
 		shell = pkgs.zsh;
-		packages = with pkgs; [
-			anyrun
-			discord-canary
-			fastfetch
-			firefox
-			gimp
-			github-desktop
-			google-chrome
-			grim
-			kitty
-			neovim
-			obsidian
-			rust-analyzer
-			slurp
-			spotify
-			swww
-			waypaper
-			wl-clipboard
-		];
 	};
 
 	# shell config
@@ -130,7 +98,8 @@
 	# misc config
 	time.timeZone = "America/Chicago";
 	i18n.defaultLocale = "en_US.UTF-8";
+	programs.nix-ld.enable = true;
 
 	# nixos release (https://nixos.org/nixos/options.html)
-	system.stateVersion = "24.11";
+	system.stateVersion = "25.05";
 }
