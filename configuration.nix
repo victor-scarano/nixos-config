@@ -66,6 +66,11 @@
 
 	# enable daemons and services
 	services.openssh.enable = true;
+	programs.mosh.enable = true;
+	services.vscode-server = {
+		enable = true;
+		enableFHS = true;
+	};
 	services.xserver.displayManager.gdm.enable = true;
 	services.printing.enable = true;
 
