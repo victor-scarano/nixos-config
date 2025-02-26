@@ -14,8 +14,6 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		vscode-server.url = "github:nix-community/nixos-vscode-server";
-
 		lanzaboote = {
 			url = "github:nix-community/lanzaboote/v0.4.2";
 			# optional but recommended to limit the size of the system closure
@@ -23,7 +21,7 @@
 		};
 	};
 
-	outputs = inputs @ { self, nixpkgs, home-manager, nixvim, vscode-server, lanzaboote, ... }: {
+	outputs = inputs @ { nixpkgs, home-manager, lanzaboote, ... }: {
 		nixosConfigurations.victor-nixos = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			specialArgs = { inherit inputs; };
@@ -37,7 +35,6 @@
 					# optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
 				}
 				lanzaboote.nixosModules.lanzaboote
-				vscode-server.nixosModules.default
 			];
 		};
 	};

@@ -25,12 +25,11 @@
 		isNormalUser = true;
 		description = "Victor";
 		extraGroups = [ "networkmanager" "wheel" ];
-		shell = pkgs.zsh;
+		shell = pkgs.fish;
 	};
 
 	# shell config
-	programs.zsh.enable = true;
-	environment.shells = [ pkgs.zsh ];
+	programs.fish.enable = true;
 
 	# bootloader config
 	boot.loader = {
@@ -65,11 +64,6 @@
 
 	# enable daemons and services
 	services.openssh.enable = true;
-	programs.mosh.enable = true;
-	services.vscode-server = {
-		enable = true;
-		enableFHS = true;
-	};
 	services.xserver.displayManager.gdm.enable = true;
 	services.printing.enable = true;
 

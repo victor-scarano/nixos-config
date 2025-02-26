@@ -15,19 +15,14 @@
 		firefox
 		fzf
 		gh
-		ghostty
 		gimp
 		github-desktop
 		gnupg
 		google-chrome
 		grim
-		httrack
-		kitty
-		lynx
 		nautilus
 		networkmanagerapplet
 		obsidian
-		oh-my-posh
 		ripgrep
 		rustup
 		slurp
@@ -45,6 +40,8 @@
 		zls
 	];
 
+	# TODO: comment folding and goto tree (if thats possible)
+	# TODO: set as default editor
 	programs.nixvim = {
 		enable = true;
 		enableMan = true;
@@ -262,6 +259,31 @@
 		};
 		viAlias = true;
 		vimAlias = true;
+	};
+
+	programs.ghostty = {
+		enable = true;
+		settings = {
+			theme = "vesper";
+			font-family = "UbuntuMono Nerd Font";
+			font-size = 26;
+			window-decoration = false;
+			mouse-hide-while-typing = true;
+			# background-opacity = 0.7;
+		};
+		# enableZshIntegration = true;
+	};
+
+	programs.fish = {
+		enable = true;
+		shellAliases = {
+			# clear = "clear && printf '\033[3J";
+			# cls = "clear && printf '\033[3J";
+			"cd.." = "cd ..";
+			ls = "ls --color";
+			lsa = "ls --color -a";
+			ff = "fastfetch";
+		};
 	};
 
 	programs.git = {
