@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
 	imports = [ inputs.nixvim.homeManagerModules.nixvim ];
@@ -6,22 +6,6 @@
 	home.username = "victor";
 	home.homeDirectory = "/home/victor";
 
-	# link the configuration file in current directory to the specified location in home directory
-	# home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-	# link all files in `./scripts` to `~/.config/i3/scripts`
-	# home.file.".config/i3/scripts" = {
-	#   source = ./scripts;
-	#   recursive = true;   # link recursively
-	#   executable = true;  # make all files executable
-	# };
-
-	# encode the file content in nix configuration file directly
-	# home.file.".xxx".text = ''
-	#     xxx
-	# '';
-
-	# Packages that should be installed to the user profile.
 	home.packages = with pkgs; [
 		anyrun
 		btop
@@ -41,7 +25,6 @@
 		kitty
 		lynx
 		nautilus
-		# neovim; must not be installed for nixvim to work correctly
 		networkmanagerapplet
 		obsidian
 		oh-my-posh
@@ -65,15 +48,25 @@
 	programs.nixvim = {
 		enable = true;
 		enableMan = true;
+		extraConfigLua = ''
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+			vim.api.nvim_create_autocmd("CursorMoved", {
+				group = vim.api.nvim_create_augroup("auto-hlsearch", { clear = true }),
+				callback = function()
+					if vim.v.hlsearch == 1 and vim.fn.searchcount().exact_match == 0 then
+						vim.schedule(function()
+							vim.cmd.nohlsearch()
+						end)
+					end
+				end
+			})
+		'';
 		colorschemes.catppuccin = {
 			enable = true;
 			settings.transparent_background = true;
 		};
-		globals = {
-			mapleader = " ";
-			loaded_netrw = 1; # is this working?
-			loaded_netrwPlugin = 1; # is this working?
-		};
+		globals.mapleader = " ";
 		keymaps = [
 			{
 				key = "<leader>q";
@@ -126,15 +119,13 @@
 			shiftwidth = 4;
 			wrap = true;
 			termguicolors = true;
-			# colorcolumn = { 80, 120 };
+			colorcolumn = [ 80 120 ];
 			foldlevel = 99;
 			foldlevelstart = 99;
 			laststatus = 3;
 			# signcolumn = ""
 			autoindent = true;
 			smartindent = true;
-			# iskeyword:remove("_")
-			# iskeyword:append("_")
 		};
 		plugins = {
 			cmp = {
@@ -147,10 +138,14 @@
 						{ name = "path"; }
 					];
 					mapping.__raw = ''cmp.mapping.preset.insert({ ["<Tab>"] = cmp.mapping.confirm({ select = true }) })'';
-					# TODO: window single border config
+					window = {
+						completion = {
+							__raw = ''require("cmp").config.window.bordered({ border = "single" })'';
+							scrollbar = false;
+						};
+						documentation.__raw = ''require("cmp").config.window.bordered({ border = "single" })'';
+					};
 					# TODO: maybe add some more sources (like cmdline or path)
-					# vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-					# vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 				};
 			};
 			crates.enable = true;
@@ -158,16 +153,21 @@
 			indent-blankline = {
 				enable = true;
 				settings.indent.char = "│"; # alternate chars: '┃' and '▏'
-				# TODO: disable scope?
+				settings.scope.enabled = false;
 			};
 			lsp = {
 				enable = true;
+				# TODO: enable inlay hints and create keybind to toggle them
 				servers = {
 					clangd.enable = true;
 					lua_ls.enable = true;
 					marksman.enable = true;
 					nixd.enable = true;
-					rust_analyzer.enable = true;
+					rust_analyzer = {
+						enable = true;
+						installCargo = true;
+						installRustc = true;
+					};
 					taplo.enable = true;
 					zls.enable = true;
 				};
@@ -189,21 +189,76 @@
 			nvim-autopairs.enable = true;
 			nvim-tree = {
 				enable = true;
-				# openOnSetupFile = true;
-				# autoReloadOnWrite = true;
+				autoReloadOnWrite = true;
+				disableNetrw = true;
+				hijackNetrw = true;
+				hijackDirectories = {
+					enable = true;
+					autoOpen = true;
+				};
+				openOnSetup = true;
 			};
 			nvim-ufo.enable = true;
 			# add spider plugin for counting underscore as a word
+			telescope = {
+				enable = true;
+				keymaps = {
+					"<leader>f" = {
+						action = "find_files";
+						options = {
+							desc = "List files using Telescope.";
+							silent = true;
+						};
+					};
+					"<leader>g" = {
+						action = "live_grep";
+						options = {
+							desc = "Live grep files using Telescope.";
+							silent = true;
+						};
+					};
+					"<leader>b" = {
+						action = "buffers";
+						options = {
+							desc = "List open buffers using Telescope.";
+							silent = true;
+						};
+					};
+				};
+				settings.defaults = {
+					border = {
+						prompt = [ 1 1 1 1 ];
+						results = [ 1 1 1 1 ];
+						preview = [ 1 1 1 1 ];
+					};
+					borderchars = {
+						prompt = [ " " " " "─" "│" "│" " " "─" "└" ];
+						results = [ "─" " " " " "│" "┌" "─" " " "│" ];
+						preview = [ "─" "│" "─" "│" "┬" "┐" "┘" "┴" ];
+					};
+				};
+				# TODO: telescope-ui-select.nvim
+			};
 			treesitter = {
 				enable = true;
 				gccPackage = null;
 				nixGrammars = true;
 				settings = {
+					auto_install = true;
 					highlight.enable = true;
 					indent.enable = true;
+					sync_install = true;
 				};
 			};
-			treesitter-context.enable = true;
+			treesitter-context = {
+				enable = true;
+				settings.max_lines = 1;
+			};
+			web-devicons.enable = true;
+			which-key = {
+				enable = true;
+				settings.delay = 1000;
+			};
 		};
 		viAlias = true;
 		vimAlias = true;

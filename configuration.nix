@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ pkgs, lib, ... }:
 
 {
 	imports = [ ./hardware-configuration.nix ];
@@ -12,7 +12,6 @@
 	environment.systemPackages = with pkgs; [
 		gcc
 		git
-		gparted # must be installed as a system package
 		kdePackages.breeze
 		libgcc
 		polkit
