@@ -269,13 +269,16 @@
 			font-size = 26;
 			window-decoration = false;
 			mouse-hide-while-typing = true;
+			confirm-close-surface = false;
+			background = "Black";
 			# background-opacity = 0.7;
 		};
-		# enableZshIntegration = true;
+		enableFishIntegration = true;
 	};
 
 	programs.fish = {
 		enable = true;
+		interactiveShellInit = "set fish_greeting";
 		shellAliases = {
 			# clear = "clear && printf '\033[3J";
 			# cls = "clear && printf '\033[3J";

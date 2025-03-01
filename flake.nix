@@ -26,11 +26,11 @@
 			system = "x86_64-linux";
 			specialArgs = { inherit inputs; };
 			modules = [
-				./configuration.nix
+				./modules/nixos/default.nix
 				home-manager.nixosModules.home-manager {
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
-					home-manager.users.victor = import ./home.nix;
+					home-manager.users.victor = import ./modules/home/default.nix;
 					home-manager.extraSpecialArgs = { inherit inputs; };
 					# optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
 				}
