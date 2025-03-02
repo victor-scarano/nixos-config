@@ -1,27 +1,41 @@
 { pkgs, ... }: {
 	home.pointerCursor = {
 		gtk.enable = true;
-		package = pkgs.kdePackages.breeze;
+		package = pkgs.kdePackages.breeze-icons;
 		name = "Breeze";
 		size = 32;
 	};
 
-	/* for some reason this stops the home manager service from being able to start
 	gtk = {
 		enable = true;
-
+		theme = {
+			name = "Adwaita-dark";
+			package = pkgs.gnome-themes-extra;
+		};
 		iconTheme = {
 			package = pkgs.adwaita-icon-theme;
 			name = "Adwaita";
 		};
 	};
-	*/
+
+	dconf = {
+		enable = true;
+		settings = {
+			"org/gnome/desktop/interface" = {
+				color-scheme = "prefer-dark";
+			};
+		};
+	};
 
 	wayland.windowManager.hyprland = {
 		enable = true;
 		systemd.variables = ["--all"];
 		settings = {
-			# set cursor
+			env = [
+				"XCURSOR_THEME, Breeze"
+				"XCURSOR_SIZE, 32"
+				"HYPRCURSOR_SIZE, 32"
+			];
 			monitor = [
 				"DP-2, 2560x1440@240, 0x0, auto"
 				"DP-3, 2560x1440@144, 2560x-430, auto, transform, 1"

@@ -1,6 +1,4 @@
-{ inputs, ... }:
-
-{
+{ inputs, ... }: {
 	imports = [ inputs.nixvim.homeManagerModules.nixvim ];
 
 	# TODO: comment folding and goto tree (if thats possible)

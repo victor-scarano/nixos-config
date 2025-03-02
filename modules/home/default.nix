@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{ pkgs, ... }: {
 	imports = [ ./fish.nix ./ghostty.nix ./git.nix ./hyprland.nix ./neovim.nix ];
 
 	home.username = "victor";
