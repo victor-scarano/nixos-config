@@ -6,14 +6,16 @@
 		size = 32;
 	};
 
-	# gtk = {
-	# enable = true;
-	# 
-	# iconTheme = {
-	# package = pkgs.adwaita-icon-theme;
-	# name = "Adwaita";
-	# };
-	# };
+	/* for some reason this stops the home manager service from being able to start
+	gtk = {
+		enable = true;
+
+		iconTheme = {
+			package = pkgs.adwaita-icon-theme;
+			name = "Adwaita";
+		};
+	};
+	*/
 
 	wayland.windowManager.hyprland = {
 		enable = true;

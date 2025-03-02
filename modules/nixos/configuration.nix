@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
 	imports = [ ./hardware-configuration.nix ];
@@ -32,15 +32,15 @@
 	# bootloader config
 	boot.loader = {
 		systemd-boot = {
-			# enable = true;
-			enable = lib.mkForce false;
+			enable = true;
+			# enable = lib.mkForce false;
 			consoleMode = "max";
 		};
 		efi.canTouchEfiVariables = true;
 		timeout = 10;
 	};
 	boot.lanzaboote = {
-		enable = true;
+		enable = false; # enable = true;
 		pkiBundle = "/var/lib/sbctl";
 	};
 
@@ -63,7 +63,7 @@
 	# enable daemons and services
 	services.openssh.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
-	services.xserver.displayManager.gdm.wayland = true;
+	programs.hyprland.enable = true; # for some reason this line has to exist otherwise gdm won't work:
 	services.printing.enable = true;
 
 	# polkit
