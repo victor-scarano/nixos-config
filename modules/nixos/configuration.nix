@@ -8,11 +8,9 @@
 	nixpkgs.config.allowUnfree = true;
 
 	# system packages
-	programs.hyprland.enable = true;
 	environment.systemPackages = with pkgs; [
 		gcc
 		git
-		kdePackages.breeze
 		libgcc
 		polkit
 		polkit_gnome
@@ -65,6 +63,7 @@
 	# enable daemons and services
 	services.openssh.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
+	services.xserver.displayManager.gdm.wayland = true;
 	services.printing.enable = true;
 
 	# polkit
