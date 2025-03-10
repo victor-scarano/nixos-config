@@ -8,9 +8,7 @@
 		./neovim.nix
 	];
 
-	# home-manager.useGlobalPkgs = true;
-	# home-manager.useUserPkgs = true;
-	nix.package = pkgs.nix;
+	nix.package = pkgs.nix; # what does this do
 	nixpkgs.config.allowUnfree = true;
 
 	home.username = "victor";
