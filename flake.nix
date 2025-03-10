@@ -9,6 +9,8 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
+		hyprland.url = "github:hyprwm/Hyprland";
+
 		nixvim = {
 			url = "github:nix-community/nixvim";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -27,14 +29,14 @@
 			specialArgs = { inherit inputs; };
 			modules = [
 				./modules/nixos/default.nix
-				home-manager.nixosModules.home-manager {
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.users.victor = import ./modules/home/default.nix;
-					home-manager.extraSpecialArgs = { inherit inputs; };
-					# optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
-				}
 				lanzaboote.nixosModules.lanzaboote
+			];
+		};
+		homeConfigurations."victor@victor-nixos" = home-manager.lib.homeManagerConfiguration {
+			pkgs = nixpkgs.legacyPackages.x86_64-linux;
+			extraSpecialArgs = { inherit inputs; };
+			modules = [
+				./modules/home/default.nix
 			];
 		};
 	};

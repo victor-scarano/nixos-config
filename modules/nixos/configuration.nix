@@ -1,5 +1,8 @@
 { pkgs, ... }: {
-	imports = [ ./hardware-configuration.nix ];
+	imports = [
+		./hardware-configuration.nix
+		# inputs.home-manager.nixosModules.home-manager
+	];
 
 	# enable flakes
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -7,12 +10,13 @@
 
 	# system packages
 	environment.systemPackages = with pkgs; [
-		gcc
+		# gcc
 		git
-		libgcc
-		polkit
-		polkit_gnome
-		sbctl
+		# libgcc
+		# polkit
+		# polkit_gnome
+		# sbctl
+		vim
 		wget
 	];
 
@@ -61,10 +65,13 @@
 	# enable daemons and services
 	services.openssh.enable = true;
 	services.xserver.displayManager.gdm.enable = true;
-	programs.hyprland.enable = true; # for some reason this line has to exist otherwise gdm won't work:
+	# for some reason this line has to exist otherwise gdm won't work:
+	# do i also have to set the package so that it uses the flake version?
+	programs.hyprland.enable = true;
 	services.printing.enable = true;
 
 	# polkit
+	/*
 	security.polkit.enable = true;
 	systemd = {
 		user.services.polkit-gnome-authentication-agent-1 = {
@@ -81,6 +88,7 @@
 			};
 		};
 	};
+	*/
 
 	# font config
 	fonts.packages = with pkgs; [
@@ -92,8 +100,8 @@
 
 	# misc config
 	time.timeZone = "America/Chicago";
-	i18n.defaultLocale = "en_US.UTF-8";
-	programs.nix-ld.enable = true;
+	i18n.defaultLocale = "en_US.UTF-8"; # does this need to be set?
+	# programs.nix-ld.enable = true;
 
 	# nixos release (https://nixos.org/nixos/options.html)
 	system.stateVersion = "25.05";

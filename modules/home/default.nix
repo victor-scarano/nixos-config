@@ -1,5 +1,17 @@
 { pkgs, ... }: {
-	imports = [ ./fish.nix ./ghostty.nix ./git.nix ./hyprland.nix ./neovim.nix ];
+	imports = [
+		./fish.nix
+		./ghostty.nix
+		./git.nix
+		./hyprland.nix
+		./librewolf.nix
+		./neovim.nix
+	];
+
+	# home-manager.useGlobalPkgs = true;
+	# home-manager.useUserPkgs = true;
+	nix.package = pkgs.nix;
+	nixpkgs.config.allowUnfree = true;
 
 	home.username = "victor";
 	home.homeDirectory = "/home/victor";
@@ -11,23 +23,23 @@
 		btop
 		discord-canary
 		fastfetch
-		file
-		firefox
-		fzf
+		# file
+		# fzf
 		gh
 		gimp
 		github-desktop
-		gnupg
+		# gnupg
 		google-chrome
 		grim
 		nautilus
 		networkmanagerapplet
 		obsidian
 		ripgrep
+		rustdesk
 		rustup
 		slurp
 		spotify
-		stow
+		# stow
 		swww
 		tree
 		unzip

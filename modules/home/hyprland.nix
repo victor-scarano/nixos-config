@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{ inputs, pkgs, ... }: {
+	/*
+	nix.settings = {
+		substituters = ["https://hyprland.cachix.org"];
+		trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+	};
+
 	home.pointerCursor = {
 		gtk.enable = true;
 		package = pkgs.kdePackages.breeze-icons;
@@ -26,9 +32,12 @@
 			};
 		};
 	};
+	*/
 
 	wayland.windowManager.hyprland = {
 		enable = true;
+		# package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+		# portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 		systemd.variables = ["--all"];
 		settings = {
 			env = [
