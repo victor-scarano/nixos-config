@@ -1,5 +1,7 @@
 { pkgs, ... }: {
 	# is there a better way to do any of this configuration here
+	# TODO: enable hardware acceleration
+	# TODO: enable password saving
 	programs.firefox = {
 		enable = true;
 		package = pkgs.librewolf;

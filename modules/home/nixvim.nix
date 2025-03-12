@@ -1,10 +1,8 @@
-{ inputs, ... }: {
-	imports = [ inputs.nixvim.homeManagerModules.nixvim ];
-
+{
 	# TODO: comment folding and goto tree (if thats possible)
 	# TODO: set as default editor
-	# TODO: vim.g.zig_fmt_autosave = 0
 	# TODO: i want the cursor to go to the last character when i press w on the last word, rather than jumping to the next line
+	# TODO: maybe configure snake and camel case as words
 	programs.nixvim = {
 		enable = true;
 		defaultEditor = true;

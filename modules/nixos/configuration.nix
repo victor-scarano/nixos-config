@@ -1,24 +1,17 @@
-{ pkgs, ... }: {
-	imports = [
-		./hardware-configuration.nix
-		# inputs.home-manager.nixosModules.home-manager
-	];
+{ pkgs, lib, ... }: {
+	imports = [ ./hardware-configuration.nix ];
 
-	# enable flakes
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 	nixpkgs.config.allowUnfree = true;
+	nix = {
+		settings = {
+			experimental-features = [ "nix-command" "flakes" ];
+			trusted-users = [ "root" "victor" "@wheel" ]; # do i need all of these?
+		};
+		channel.enable = false;
+	};
 
 	# system packages
-	environment.systemPackages = with pkgs; [
-		# gcc
-		git
-		# libgcc
-		# polkit
-		# polkit_gnome
-		# sbctl
-		vim
-		wget
-	];
+	environment.systemPackages = with pkgs; [ git vim wget ];
 
 	# user config
 	users.users.victor = {
@@ -34,15 +27,17 @@
 	# bootloader config
 	boot.loader = {
 		systemd-boot = {
-			enable = true;
-			# enable = lib.mkForce false;
+			# enable = true;
+			enable = lib.mkForce false;
 			consoleMode = "max";
 		};
 		efi.canTouchEfiVariables = true;
 		timeout = 10;
 	};
+
+	# enable secure boot
 	boot.lanzaboote = {
-		enable = false; # enable = true;
+		enable = true;
 		pkiBundle = "/var/lib/sbctl";
 	};
 
@@ -70,26 +65,6 @@
 	programs.hyprland.enable = true;
 	services.printing.enable = true;
 
-	# polkit
-	/*
-	security.polkit.enable = true;
-	systemd = {
-		user.services.polkit-gnome-authentication-agent-1 = {
-			description = "polkit-gnome-authentication-agent-1";
-			wantedBy = [ "graphical-session.target" ];
-			wants = [ "graphical-session.target" ];
-			after = [ "graphical-session.target" ];
-			serviceConfig = {
-				Type = "simple";
-				ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-				Restart = "on-failure";
-				RestartSec = 1;
-				TimeoutStopSec = 10;
-			};
-		};
-	};
-	*/
-
 	# font config
 	fonts.packages = with pkgs; [
 		noto-fonts
@@ -100,8 +75,6 @@
 
 	# misc config
 	time.timeZone = "America/Chicago";
-	i18n.defaultLocale = "en_US.UTF-8"; # does this need to be set?
-	# programs.nix-ld.enable = true;
 
 	# nixos release (https://nixos.org/nixos/options.html)
 	system.stateVersion = "25.05";

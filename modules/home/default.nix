@@ -1,43 +1,40 @@
 { pkgs, ... }: {
 	imports = [
+		./anyrun.nix
 		./fish.nix
 		./ghostty.nix
 		./git.nix
 		./hyprland.nix
 		./librewolf.nix
-		./neovim.nix
+		./nixvim.nix
 	];
 
 	nix.package = pkgs.nix; # what does this do
 	nixpkgs.config.allowUnfree = true;
 
-	home.username = "victor";
-	home.homeDirectory = "/home/victor";
+	home = {
+		enableNixpkgsReleaseCheck = false;
+		username = "victor";
+		homeDirectory = "/home/victor";
+	};
 
 	programs.home-manager.enable = true;
 
 	home.packages = with pkgs; [
-		anyrun
 		btop
 		discord-canary
-		fastfetch
-		# file
-		# fzf
-		gh
+		fastfetch # configure with home manager
+		fzf
 		gimp
-		github-desktop
-		# gnupg
 		google-chrome
 		grim
 		nautilus
 		networkmanagerapplet
 		obsidian
 		ripgrep
-		rustdesk
 		rustup
 		slurp
 		spotify
-		# stow
 		swww
 		tree
 		unzip
