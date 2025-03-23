@@ -1,16 +1,16 @@
-{ pkgs, ... }: {
+{ ... }: {
 	# is there a better way to do any of this configuration here
-	# TODO: enable hardware acceleration
+	# TODO: enable hardware acceleration and disable framerate cap
 	# TODO: enable password saving
 	programs.firefox = {
 		enable = true;
-		package = pkgs.librewolf;
 		policies = {
 			DisableTelemetry = true;
 			DisableFirefoxStudies = true;
 			NewTabPage = false;
 			Preferences = {
 				"browser.fullscreen.autohide" = false;
+				"browser.preferences.defaultPerformanceSettings.enabled" = false;
 				"extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
 			};
 			ExtensionSettings = {

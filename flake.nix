@@ -3,7 +3,6 @@
 
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
 		home-manager = {
 			url = "github:nix-community/home-manager/release-24.11";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -29,27 +28,20 @@
 		};
 	};
 
-	outputs = inputs @ { nixpkgs, home-manager, lanzaboote, anyrun, nixvim, ... }: {
-		nixosConfigurations = {
-			victor-nixos = nixpkgs.lib.nixosSystem {
-				system = "x86_64-linux";
-				specialArgs = { inherit inputs; };
-				modules = [
-					./modules/nixos/default.nix
-					lanzaboote.nixosModules.lanzaboote
-				];
-			};
-		};
-		homeConfigurations = {
-			"victor@victor-nixos" = home-manager.lib.homeManagerConfiguration {
-				pkgs = nixpkgs.legacyPackages.x86_64-linux;
-				extraSpecialArgs = { inherit inputs; };
-				modules = [
-					./modules/home/default.nix
-					anyrun.homeManagerModules.default
-					nixvim.homeManagerModules.default
-				];
-			};
+	outputs = inputs @ { nixpkgs, home-manager, lanzaboote, ... }: {
+		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+			system = "x86_64-linux";
+			specialArgs = { inherit inputs; };
+			modules = [
+				./modules/nixos/default.nix
+				lanzaboote.nixosModules.lanzaboote
+				home-manager.nixosModules.home-manager {
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+					home-manager.extraSpecialArgs = { inherit inputs; };
+					home-manager.users.victor = import ./modules/home/default.nix;
+				}
+			];
 		};
 	};
 }

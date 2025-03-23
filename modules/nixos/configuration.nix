@@ -5,13 +5,13 @@
 	nix = {
 		settings = {
 			experimental-features = [ "nix-command" "flakes" ];
-			trusted-users = [ "root" "victor" "@wheel" ]; # do i need all of these?
+			trusted-users = [ "root" "@wheel" ];
 		};
 		channel.enable = false;
 	};
 
 	# system packages
-	environment.systemPackages = with pkgs; [ git vim wget ];
+	environment.systemPackages = with pkgs; [ gh git neovim wget ];
 
 	# user config
 	users.users.victor = {
@@ -43,7 +43,7 @@
 
 	# networking config
 	networking.networkmanager.enable = true;
-	networking.hostName = "victor-nixos"; 
+	networking.hostName = "nixos"; 
 
 	# audio config
 	services.pulseaudio.enable = false;
@@ -59,10 +59,16 @@
 
 	# enable daemons and services
 	services.openssh.enable = true;
-	services.xserver.displayManager.gdm.enable = true;
-	# for some reason this line has to exist otherwise gdm won't work:
-	# do i also have to set the package so that it uses the flake version?
-	programs.hyprland.enable = true;
+	programs.dconf.enable = true;
+	security.polkit.enable = true;
+	services.greetd = {
+		enable = true;
+		settings.default_session = {
+			command = "sway";
+			user = "victor";
+		};
+	};
+	programs.hyprland.enable = false;
 	services.printing.enable = true;
 
 	# font config
@@ -71,11 +77,11 @@
 		noto-fonts-cjk-sans
 		nerd-fonts.jetbrains-mono
 		nerd-fonts.ubuntu-mono
+		nerd-fonts.ubuntu
 	];
 
 	# misc config
 	time.timeZone = "America/Chicago";
 
-	# nixos release (https://nixos.org/nixos/options.html)
 	system.stateVersion = "25.05";
 }

@@ -1,8 +1,10 @@
-{
+{ inputs, ... }: {
+	imports = [ inputs.nixvim.homeManagerModules.nixvim ];
 	# TODO: comment folding and goto tree (if thats possible)
 	# TODO: set as default editor
 	# TODO: i want the cursor to go to the last character when i press w on the last word, rather than jumping to the next line
 	# TODO: maybe configure snake and camel case as words
+	# TODO: is there a way to make the buffer move up/down with the cursor sooner than it normally does?
 	programs.nixvim = {
 		enable = true;
 		defaultEditor = true;
@@ -22,23 +24,9 @@
 				end
 			})
 		'';
-		colorschemes = {
-			catppuccin = {
-				enable = true;
-				settings.transparent_background = true;
-			};
-			base16 = {
-				# enable = true;
-				colorscheme = "irblack";
-			};
-			gruvbox = {
-				# enable = true;
-				settings.transparent_mode = false;
-			};
-			vscode = {
-				enable = true;
-				settings.transparent = false;
-			};
+		colorschemes.catppuccin = {
+			enable = true;
+			settings.transparent_background = true;
 		};
 		globals = {
 			mapleader = " ";
@@ -82,6 +70,14 @@
 				action = "<CMD>NvimTreeToggle<CR>";
 				options = {
 					desc = "Toggles the directory tree.";
+					silent = true;
+				};
+			}
+			{
+				key = "<leader>i";
+				action = "<CMD>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>";
+				options = {
+					desc = "Toggles inlay hints.";
 					silent = true;
 				};
 			}
@@ -133,10 +129,14 @@
 				settings.scope.enabled = false;
 			};
 			lsp = {
+				# TODO: maybe add some more keymaps
+				# https://nix-community.github.io/nixvim/plugins/lsp/keymaps/index.html
 				enable = true;
-				# TODO: enable inlay hints and create keybind to toggle them
+				inlayHints = true;
 				servers = {
 					clangd.enable = true;
+					cssls.enable = true;
+					java_language_server.enable = true;
 					lua_ls.enable = true;
 					marksman.enable = true;
 					nixd.enable = true;
@@ -154,7 +154,7 @@
 				enable = true;
 				settings = {
 					options = {
-						theme = "auto"; # "catppuccin";
+						theme = "auto"; # catppuccin;
 						section_separators = { left = ""; right = ""; };
 						component_separators = { left = ""; right = ""; };
 						globalstatus = true;
@@ -269,7 +269,7 @@
 			};
 			web-devicons.enable = true;
 			which-key = {
-				enable = true;
+				enable = false;
 				settings.delay = 1000;
 			};
 		};

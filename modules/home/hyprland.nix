@@ -1,48 +1,49 @@
-{ inputs, pkgs, ... }: {
-	/*
+{ pkgs, ... }: {
 	nix.settings = {
-		substituters = ["https://hyprland.cachix.org"];
-		trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+		substituters = [ "https://hyprland.cachix.org" ];
+		trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
 	};
 
-	home.pointerCursor = {
-		gtk.enable = true;
-		package = pkgs.kdePackages.breeze-icons;
-		name = "Breeze";
-		size = 32;
-	};
-
+	/*
 	gtk = {
 		enable = true;
+
 		theme = {
 			name = "Adwaita-dark";
 			package = pkgs.gnome-themes-extra;
 		};
+
+		cursorTheme = {
+			package = pkgs.kdePackages.breeze-icons;
+			name = "Breeze";
+			size = 32;
+		};
+
 		iconTheme = {
-			package = pkgs.adwaita-icon-theme;
+			package = pkgs.gnome.adwaita-icon-theme;
 			name = "Adwaita";
 		};
-	};
 
+		font = {
+			name = "Sans";
+			size = 11;
+		};
+	};
 	dconf = {
 		enable = true;
-		settings = {
-			"org/gnome/desktop/interface" = {
-				color-scheme = "prefer-dark";
-			};
-		};
+		settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 	};
 	*/
 
 	wayland.windowManager.hyprland = {
 		enable = true;
-		# package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-		# portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
 		systemd.variables = ["--all"];
+		xwayland.enable = true;
 		settings = {
 			env = [
 				"XCURSOR_THEME, Breeze"
 				"XCURSOR_SIZE, 32"
+				"HYPRCURSOR_THEME, Breeze"
 				"HYPRCURSOR_SIZE, 32"
 			];
 			monitor = [
@@ -50,11 +51,10 @@
 				"DP-3, 2560x1440@144, 2560x-430, auto, transform, 1"
 			];
 			general = {
-				# border_size = 2;
-				# gaps_in = 4.5;
-				# gaps_out = 8;
+				border_size = 2;
+				gaps_in = 0;
+				gaps_out = 0;
 				"col.active_border" = "rgb(ffffff)";
-				"col.inactive_border" = "rgb(ffffff)";
 				resize_on_border = true;
 				allow_tearing = false;
 				layout = "dwindle";
@@ -69,13 +69,14 @@
 					vibrancy = 1;
 				};
 			};
+			animations.enabled = false;
 			animation = [
-				"windowsIn, 1, 3, default, slide"
-				"windowsOut, 1, 3, default, slide"
+				"windowsIn, 0, 3, default, slide"
+				"windowsOut, 0, 3, default, slide"
 				"windowsMove, 1, 3, default, popin"
-				"border, 1, 10, default"
-				"borderangle, 1, 8, default"
-				"fade, 1, 7, default"
+				"border, 0, 10, default"
+				"borderangle, 0, 8, default"
+				"fade, 0, 7, default"
 				"workspaces, 1, 3, default, slidevert"
 			];
 			input = {
@@ -125,8 +126,7 @@
 				"SUPER, C, togglespecialworkspace, magic"
 				"SUPER SHIFT, C, movetoworkspace, special:magic"
 
-				"SUPER SHIFT, S, exec, grim -g $(slurp -d) - | wl-copy"
-
+				"SUPER SHIFT, S, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 			];
 			bindm = [ "SUPER, mouse:272, movewindow" ];
 		};
