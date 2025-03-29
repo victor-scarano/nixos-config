@@ -51,10 +51,12 @@
 	services.pipewire = {
 		enable = true;
 		audio.enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
 		pulse.enable = true;
 		jack.enable = true;
+		alsa = {
+			enable = true;
+			support32Bit = true;
+		};
 	};
 
 	# enable daemons and services
@@ -68,7 +70,11 @@
 			user = "victor";
 		};
 	};
-	programs.hyprland.enable = false;
+	xdg.portal = {
+		enable = true;
+		wlr.enable = true;
+		configPackages = [ pkgs.xdg-desktop-portal-gtk ];
+	};
 	services.printing.enable = true;
 
 	# font config

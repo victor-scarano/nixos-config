@@ -1,9 +1,9 @@
-{ ... }: {
-	# is there a better way to do any of this configuration here
+{ pkgs, ... }: {
+	# is there a better way to do any of this configuration here?
 	# TODO: enable hardware acceleration and disable framerate cap
-	# TODO: enable password saving
 	programs.firefox = {
 		enable = true;
+		package = pkgs.firefox-wayland;
 		policies = {
 			DisableTelemetry = true;
 			DisableFirefoxStudies = true;
