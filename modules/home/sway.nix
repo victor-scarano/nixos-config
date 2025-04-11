@@ -23,8 +23,16 @@
 			terminal = "ghostty";
 			menu = "anyrun";
 			output = {
-				DP-2 = { mode = "2560x1440@240Hz"; pos = "0 0"; };
-				DP-3 = { mode = "2560x1440@144Hz"; pos = "2560 0"; transform = "270"; };
+				DP-2 = {
+					mode = "2560x1440@240Hz";
+					pos = "0 1440";
+					bg = "${config.home.path}/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill";
+				};
+				DP-3 = {
+					mode = "2560x1440@144Hz";
+					pos = "0 0";
+					bg = "${config.home.path}/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536_Portrait.png fill";
+				};
 			};
 			workspaceOutputAssign = [
 				{ output = "DP-2"; workspace = "1"; }
@@ -60,7 +68,7 @@
 			# TODO: add power/login button
 			time = {
 				position = 1; # starts at 0
-				settings.format = "%b %-d %-I:%M";
+				settings.format = "%b %-d %-I:%M %p";
 			};
 		};
 	};

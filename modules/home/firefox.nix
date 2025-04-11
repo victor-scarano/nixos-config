@@ -26,6 +26,9 @@
 					install_url = "https://addons.mozilla.org/firefox/downloads/file/4439735/darkreader-4.9.103.xpi";
 					installation_mode = "force_installed";
 				};
+				# TODO:
+				# add this addon
+				# https://addons.mozilla.org/en-US/firefox/addon/ctrl-number-to-switch-tabs/?_gl=1*nhzg6s*_ga*NDAxNjIwNDU3LjE3Mzg1NDY1MDM.*_ga_2VC139B3XV*MTc0NDI1MjE3OS40LjAuMTc0NDI1MjE3OS4wLjAuMA..
 			};
 		};
 	};

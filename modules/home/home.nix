@@ -13,6 +13,7 @@
 		google-chrome
 		grim
 		libreoffice
+		lunar-client
 		# nautilus
 		obsidian
 		obs-studio
@@ -24,7 +25,7 @@
 		tree
 		vlc
 		# waypaper
-		# https://www.reddit.com/r/unixporn/comments/1ji2flj/oc_bettercontrol_a_sleek_gtkbased_control_panel/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+		# https://github.com/quantumvoid0/better-control
 	];
 
 	# update this to 25.05 when it's released

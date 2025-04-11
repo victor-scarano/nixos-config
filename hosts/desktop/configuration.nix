@@ -11,7 +11,7 @@
 	};
 
 	# system packages
-	environment.systemPackages = with pkgs; [ gh git neovim wget ];
+	environment.systemPackages = with pkgs; [ git neovim ];
 
 	# user config
 	users.users.victor = {
