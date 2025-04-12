@@ -12,7 +12,6 @@
 		# https://github.com/nix-community/lanzaboote
 		lanzaboote = {
 			url = "github:nix-community/lanzaboote/v0.4.2";
-			# optional but recommended to limit the size of the system closure
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
@@ -21,10 +20,7 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		nixvim = {
-			url = "github:nix-community/nixvim";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+		neovim.url = "path:../../modules/neovim";
 	};
 
 	outputs = inputs @ { nixpkgs, home-manager, lanzaboote, ... }: {
@@ -32,14 +28,13 @@
 			system = "x86_64-linux";
 			specialArgs = { inherit inputs; };
 			modules = [
-				# ./modules/nixos/default.nix
 				./configuration.nix
 				lanzaboote.nixosModules.lanzaboote
 				home-manager.nixosModules.home-manager {
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
 					home-manager.extraSpecialArgs = { inherit inputs; };
-					home-manager.users.victor = import ./../../modules/home/default.nix;
+					home-manager.users.victor = import ./../../modules/home;
 				}
 			];
 		};

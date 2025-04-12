@@ -1,12 +1,6 @@
 { inputs, pkgs, ... }: {
 	imports = [ inputs.nixvim.homeManagerModules.nixvim ];
 
-	# TODO: comment folding and goto tree (if thats possible)
-	# TODO: set as default editor
-	# TODO: i want the cursor to go to the last character when i press w on the last word, rather than jumping to the next line
-	# TODO: maybe configure snake and camel case as words
-	# TODO: is there a way to make the buffer move up/down with the cursor sooner than it normally does?
-	# TODO: is there a way to make hovering a file in nvim tree preview the file?
 	
 	home.packages = with pkgs; [ zig zls ];
 
