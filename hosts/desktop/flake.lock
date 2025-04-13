@@ -189,12 +189,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-4fCgKHyjkbWNCn7X/OpvYrVZStNiJE/D2cYp05jalk8=",
-        "path": "../../modules/neovim",
+        "narHash": "sha256-ByHEhNAGyHk+ZV7zFdQC89XUdePTNsm08Jz19DnjwK4=",
+        "path": "./../../modules/neovim",
         "type": "path"
       },
       "original": {
-        "path": "../../modules/neovim",
+        "path": "./../../modules/neovim",
         "type": "path"
       }
     },

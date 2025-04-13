@@ -5,7 +5,6 @@
 		./ghostty.nix
 		./home.nix
 		./firefox.nix
-		# ./neovim.nix
 		./sway.nix
 	];
 }

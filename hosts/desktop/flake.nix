@@ -20,7 +20,7 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		neovim.url = "path:../../modules/neovim";
+		neovim.url = "path:./../../modules/neovim";
 	};
 
 	outputs = inputs @ { nixpkgs, home-manager, lanzaboote, ... }: {
@@ -34,6 +34,7 @@
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
 					home-manager.extraSpecialArgs = { inherit inputs; };
+					# for some reason this can't be shorthanded to ../../modules/home
 					home-manager.users.victor = import ./../../modules/home;
 				}
 			];
