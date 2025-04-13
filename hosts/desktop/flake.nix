@@ -20,7 +20,7 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		neovim.url = "path:./../../modules/neovim";
+		neovim.url = "git+file:../../modules/neovim";
 	};
 
 	outputs = inputs @ { nixpkgs, home-manager, lanzaboote, ... }: {
