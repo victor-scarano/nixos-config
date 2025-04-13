@@ -1,0 +1,3 @@
+[submodule "modules/neovim"]
+	path = modules/neovim
+	url = /home/victor/Documents/neovim
