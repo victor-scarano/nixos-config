@@ -16,11 +16,12 @@
 		pkgs.obsidian
 		pkgs.obs-studio
 		pkgs.python314
-		pkgs.rustup
+		pkgs.cargo
 		pkgs.spotify
 		# spotify-tray # TODO: GDK_BACKEND=x11 spotify-tray
 		pkgs.tree
 		pkgs.vlc
+		pkgs.zig
 		# waypaper
 		# https://github.com/quantumvoid0/better-control
 		inputs.neovim.packages.${pkgs.system}.default
