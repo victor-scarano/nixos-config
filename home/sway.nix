@@ -30,7 +30,7 @@
 				DP-3 = {
 					mode = "2560x1440@144Hz";
 					pos = "0 0";
-					bg = "${config.home.path}/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536_Portrait.png fill";
+					bg = "${config.home.path}/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill";
 				};
 			};
 			workspaceOutputAssign = [

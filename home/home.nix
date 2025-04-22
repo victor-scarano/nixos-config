@@ -8,6 +8,8 @@
 		pkgs.btop
 		pkgs.discord-canary
 		pkgs.fastfetch # TODO: configure with home manager
+		pkgs.ffmpeg
+		pkgs.file
 		pkgs.fzf
 		pkgs.gimp
 		pkgs.google-chrome
@@ -20,6 +22,7 @@
 		pkgs.spotify
 		# spotify-tray # TODO: GDK_BACKEND=x11 spotify-tray
 		pkgs.tree
+		pkgs.tmux
 		pkgs.vlc
 		pkgs.zig
 		# waypaper

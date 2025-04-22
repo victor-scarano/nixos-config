@@ -6,5 +6,6 @@
 		./home.nix
 		./firefox.nix
 		./sway.nix
+		./yazi.nix
 	];
 }
