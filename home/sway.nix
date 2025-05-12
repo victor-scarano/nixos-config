@@ -6,7 +6,7 @@
 		package = pkgs.kdePackages.breeze-icons; # is there a way to use the plasma 5 theme?
 	};
 
-	home.packages = with pkgs; [ grim slurp swaybg wl-clipboard ];
+	home.packages = with pkgs; [ dmenu-wayland grim slurp swaybg wl-clipboard ];
 
 	# TODO: configure gtk themes
 	# TODO: configure cursor themes
@@ -20,7 +20,7 @@
 		config = {
 			modifier = "Mod4";
 			terminal = "ghostty";
-			menu = "anyrun";
+			menu = "dmenu-wl_run";
 			output = {
 				DP-2 = {
 					mode = "2560x1440@240Hz";
@@ -57,6 +57,7 @@
 	};
 
 	# should i be using i3status-rust?
+	# TODO: i3blocks
 	programs.i3status = {
 		enable = true;
 		enableDefault = false;

@@ -9,11 +9,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1743762088,
-        "narHash": "sha256-f+oXT9b3xuBDmm4v4nDqJvlHabxxZRB6+pay4Ub/NvA=",
+        "lastModified": 1745963531,
+        "narHash": "sha256-0zJs4J4w1jG83hByNJ+WxANHW7sLzMdvA408LDCCnTY=",
         "owner": "anyrun-org",
         "repo": "anyrun",
-        "rev": "786f539d69d5abcefa68978dbaa964ac14536a00",
+        "rev": "005333a60c03cf58e0a59b03e76989441276e88b",
         "type": "github"
       },
       "original": {
@@ -142,17 +142,35 @@
         ]
       },
       "locked": {
-        "lastModified": 1744743431,
-        "narHash": "sha256-iyn/WBYDc7OtjSawbegINDe/gIkok888kQxk3aVnkgg=",
+        "lastModified": 1747020534,
+        "narHash": "sha256-D/6rkiC6w2p+4SwRiVKrWIeYzun8FBg7NlMKMwQMxO0=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c61bfe3ae692f42ce688b5865fac9e0de58e1387",
+        "rev": "b4bbdc6fde16fc2051fcde232f6e288cd22007ca",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "ref": "release-24.11",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "inspiroy2": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1745639303,
+        "narHash": "sha256-t7Fej/tJyW4I3o/ENg+T4OTbwW8vzJBuPY2lWVcNj+A=",
+        "owner": "victor-scarano",
+        "repo": "huion-inspiroy2-bin",
+        "rev": "c7b94fe5cd4e1f0189fd3748e860283da0a3065f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "victor-scarano",
+        "repo": "huion-inspiroy2-bin",
         "type": "github"
       }
     },
@@ -182,17 +200,17 @@
         "type": "github"
       }
     },
-    "neovim": {
+    "my-neovim": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1744601480,
-        "narHash": "sha256-DnnhxCqat9M7Mliebg05xs322Fol+FOgI7k87A/oHJ0=",
+        "lastModified": 1747017675,
+        "narHash": "sha256-vpgMwytlGjqX3eZFNDIkszdHAY6Zz1yP+Jrj+uMsdHU=",
         "owner": "victor-scarano",
         "repo": "neovim-flake",
-        "rev": "4fdf9cd1c39798b42a672c340ae8e5fe12d539c9",
+        "rev": "883000d6ddaf10543b6a5de02aabe2854c7e45ad",
         "type": "github"
       },
       "original": {
@@ -203,16 +221,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1744232761,
-        "narHash": "sha256-gbl9hE39nQRpZaLjhWKmEu5ejtQsgI5TWYrIVVJn30U=",
+        "lastModified": 1745548790,
+        "narHash": "sha256-hQ7qPsFM+FTCcx/AIg4OOeUFTV1i/4LOAXmtN2/2wOY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f675531bc7e6657c10a18b565cfebd8aa9e24c14",
+        "rev": "e406066f94d2cb4a17d708f99bcb892ec2934e12",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -235,11 +252,27 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1744932701,
-        "narHash": "sha256-fusHbZCyv126cyArUwwKrLdCkgVAIaa/fQJYFlCEqiU=",
+        "lastModified": 1746904237,
+        "narHash": "sha256-3e+AVBczosP5dCLQmMoMEogM57gmZ2qrVSrmq9aResQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b024ced1aac25639f8ca8fdfc2f8c4fbd66c48ef",
+        "rev": "d89fc19e405cb2d55ce7cc114356846a0ee5e956",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1746904237,
+        "narHash": "sha256-3e+AVBczosP5dCLQmMoMEogM57gmZ2qrVSrmq9aResQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d89fc19e405cb2d55ce7cc114356846a0ee5e956",
         "type": "github"
       },
       "original": {
@@ -280,9 +313,10 @@
       "inputs": {
         "anyrun": "anyrun",
         "home-manager": "home-manager",
+        "inspiroy2": "inspiroy2",
         "lanzaboote": "lanzaboote",
-        "neovim": "neovim",
-        "nixpkgs": "nixpkgs_2"
+        "my-neovim": "my-neovim",
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "rust-overlay": {

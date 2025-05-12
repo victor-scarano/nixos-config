@@ -1,17 +1,18 @@
-{ pkgs, lib, ... }: {
+{ inputs, pkgs, lib, ... }: {
 	imports = [ ./hardware-configuration.nix ];
 
 	nixpkgs.config.allowUnfree = true;
-	nix = {
-		settings = {
-			experimental-features = [ "nix-command" "flakes" ];
-			trusted-users = [ "root" "@wheel" ];
-		};
-		channel.enable = false;
+	nix.settings = {
+		experimental-features = [ "nix-command" "flakes" ];
+		trusted-users = [ "root" "@wheel" ];
 	};
 
 	# system packages
-	environment.systemPackages = with pkgs; [ git neovim ];
+	environment.systemPackages = with pkgs; [
+		git
+		neovim
+		inputs.inspiroy2.packages.x86_64-linux.default
+	];
 
 	# user config
 	users.users.victor = {
@@ -59,10 +60,7 @@
 		};
 	};
 
-	# enable daemons and services
-	services.openssh.enable = true;
-	programs.dconf.enable = true;
-	security.polkit.enable = true;
+	# display manager
 	services.greetd = {
 		enable = true;
 		settings.default_session = {
@@ -70,12 +68,13 @@
 			user = "victor";
 		};
 	};
+
+	# xwayland
 	xdg.portal = {
 		enable = true;
 		wlr.enable = true;
 		configPackages = [ pkgs.xdg-desktop-portal-gtk ];
 	};
-	services.printing.enable = true;
 
 	# font config
 	fonts.packages = with pkgs; [
@@ -88,6 +87,20 @@
 
 	# misc config
 	time.timeZone = "America/Chicago";
+	services.openssh.enable = true;
+	programs.dconf.enable = true;
+	security.polkit.enable = true;
+	services.printing.enable = true;
+	hardware.bluetooth.enable = true;
+	hardware.bluetooth.powerOnBoot = true;
+	hardware.graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
+	hardware.graphics = {
+		enable = true;
+		enable32Bit = true;
+	};
 
 	system.stateVersion = "25.05";
+
+	# this is for the huion stuff
+	services.udev.packages = [ inputs.inspiroy2.packages.x86_64-linux.default ];
 }

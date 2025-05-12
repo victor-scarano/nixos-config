@@ -20,7 +20,9 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		neovim.url = "github:victor-scarano/neovim-flake";
+		my-neovim.url = "github:victor-scarano/neovim-flake";
+
+		inspiroy2.url = "github:victor-scarano/huion-inspiroy2-bin";
 	};
 
 	outputs = inputs @ { nixpkgs, home-manager, lanzaboote, ... }: {

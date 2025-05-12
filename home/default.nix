@@ -1,6 +1,6 @@
 { ... }: {
 	imports = [
-		./anyrun.nix
+		# ./anyrun.nix
 		./fish.nix
 		./ghostty.nix
 		./home.nix

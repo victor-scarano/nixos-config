@@ -1,4 +1,6 @@
 { pkgs, inputs, ... }: {
+	imports = [ inputs.my-neovim.homeModules.my-neovim ];
+
 	home = {
 		username = "victor";
 		homeDirectory = "/home/victor";
@@ -25,9 +27,10 @@
 		pkgs.tmux
 		pkgs.vlc
 		pkgs.zig
+		pkgs.unzip
 		# waypaper
 		# https://github.com/quantumvoid0/better-control
-		inputs.neovim.packages.${pkgs.system}.default
+		# inputs.neovim.packages.${pkgs.system}.default
 	];
 
 	programs.git = {
@@ -41,9 +44,19 @@
 		gitCredentialHelper.enable = true;
 	};
 
+	my-neovim = {
+		enable = true;
+		languages = {
+			lua.enable = true;
+			markdown.enable = true;
+			nix.enable = true;
+			python.enable = true;
+			rust.enable = true;
+			toml.enable = true;
+			zig.enable = true;
+		};
+	};
+
 	# update this to 25.05 when it's released
 	home.stateVersion = "24.11";
-
-	# let home manager install and manage itself
-	# programs.home-manager.enable = true;
 }
