@@ -1,5 +1,5 @@
 { inputs, pkgs, ... }: {
-	imports = [ inputs.anyrun.homeManagerModules.anyrun ];
+	imports = [ inputs.anyrun.homeManagerModules.default ];
 
 	nix.settings = {
 		builders-use-substitutes = true;

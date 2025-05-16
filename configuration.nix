@@ -11,7 +11,7 @@
 	environment.systemPackages = with pkgs; [
 		git
 		neovim
-		inputs.inspiroy2.packages.x86_64-linux.default
+		gcc
 	];
 
 	# user config
