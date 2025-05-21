@@ -1,5 +1,5 @@
 { pkgs, inputs, ... }: {
-	imports = [ inputs.my-neovim.homeModules.my-neovim ];
+	imports = [ inputs.my-neovim.homeModules.default ];
 
 	home = {
 		username = "victor";
@@ -7,27 +7,16 @@
 	};
 
 	home.packages = with pkgs; [
-		audacity
 		btop
 		discord-canary
-		fastfetch # TODO: configure with home manager
-		ffmpeg
-		file
+		fastfetch
 		fzf
-		ghidra-bin
-		gimp
 		google-chrome
 		libreoffice
-		lunar-client
-		obsidian
-		obs-studio
-		python314
-		cargo
 		spotify
 		tree
 		tmux
 		vlc
-		zig
 		unzip
 
 		# waypaper
@@ -52,7 +41,7 @@
 		shellAliases.ff = "fastfetch";
 	};
 
-	my-neovim = {
+	neovim = {
 		enable = true;
 		languages = {
 			lua.enable = true;
@@ -70,6 +59,5 @@
 		enableFishIntegration = true;
 	};
 
-	# update this to 25.05 when it's released
-	home.stateVersion = "24.11";
+	home.stateVersion = "25.05";
 }

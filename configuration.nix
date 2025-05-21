@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, ... }: {
+{ pkgs, lib, ... }: {
 	imports = [ ./hardware-configuration.nix ];
 
 	nixpkgs.config.allowUnfree = true;
@@ -8,11 +8,7 @@
 	};
 
 	# system packages
-	environment.systemPackages = with pkgs; [
-		git
-		neovim
-		gcc
-	];
+	environment.systemPackages = with pkgs; [ git neovim ];
 
 	# user config
 	users.users.victor = {
@@ -94,13 +90,6 @@
 	hardware.bluetooth.enable = true;
 	hardware.bluetooth.powerOnBoot = true;
 	hardware.graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];
-	hardware.graphics = {
-		enable = true;
-		enable32Bit = true;
-	};
 
 	system.stateVersion = "25.05";
-
-	# this is for the huion stuff
-	services.udev.packages = [ inputs.inspiroy2.packages.x86_64-linux.default ];
 }

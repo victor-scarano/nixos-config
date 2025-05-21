@@ -1,3 +1,0 @@
-[submodule "modules/neovim"]
-	path = modules/neovim
-	url = ./modules/neovim/

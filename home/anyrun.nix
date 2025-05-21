@@ -1,6 +1,4 @@
 { inputs, pkgs, ... }: {
-	imports = [ inputs.anyrun.homeManagerModules.default ];
-
 	nix.settings = {
 		builders-use-substitutes = true;
 		extra-substituters = [ "https://anyrun.cachix.org" ];
