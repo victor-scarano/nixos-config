@@ -1,8 +1,9 @@
 { lib, config, pkgs, ... }: {
 	home.pointerCursor = {
+		sway.enable = true;
 		gtk.enable = true;
-		name = "Breeze";
 		size = 32;
+		name = "Breeze";
 		package = pkgs.kdePackages.breeze-icons; # is there a way to use the plasma 5 theme?
 	};
 
@@ -22,16 +23,8 @@
 			terminal = "ghostty";
 			menu = "anyrun";
 			output = {
-				DP-2 = {
-					mode = "2560x1440@240Hz";
-					pos = "0 1440";
-					bg = "${config.home.path}/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill";
-				};
-				DP-3 = {
-					mode = "2560x1440@144Hz";
-					pos = "0 0";
-					bg = "${config.home.path}/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill";
-				};
+				DP-2 = { mode = "2560x1440@240Hz"; pos = "0 1440"; };
+				DP-3 = { mode = "2560x1440@144Hz"; pos = "0 0"; };
 			};
 			workspaceOutputAssign = [
 				{ output = "DP-2"; workspace = "1"; }
@@ -57,7 +50,7 @@
 	};
 
 	# should i be using i3status-rust?
-	# TODO: i3blocks
+	# i3blocks?
 	programs.i3status = {
 		enable = true;
 		enableDefault = false;

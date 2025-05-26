@@ -1,5 +1,5 @@
 { pkgs, inputs, ... }: {
-	imports = [ inputs.my-neovim.homeModules.default ];
+	imports = [ inputs.neovim.homeModules.default ];
 
 	home = {
 		username = "victor";
@@ -18,10 +18,6 @@
 		tmux
 		vlc
 		unzip
-
-		# waypaper
-		# spotify-tray # TODO: GDK_BACKEND=x11 spotify-tray
-		# https://github.com/quantumvoid0/better-control
 	];
 
 	programs.git = {
@@ -38,7 +34,10 @@
 	programs.fish = {
 		enable = true;
 		interactiveShellInit = "set fish_greeting";
-		shellAliases.ff = "fastfetch";
+		shellAliases = {
+			cls = "clear";
+			ff = "fastfetch";
+		};
 	};
 
 	neovim = {
@@ -52,11 +51,6 @@
 			toml.enable = true;
 			zig.enable = true;
 		};
-	};
-
-	programs.yazi = {
-		enable = true;
-		enableFishIntegration = true;
 	};
 
 	home.stateVersion = "25.05";

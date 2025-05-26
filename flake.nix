@@ -19,7 +19,7 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
-		my-neovim = {
+		neovim = {
 			url = "github:victor-scarano/neovim-flake";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
