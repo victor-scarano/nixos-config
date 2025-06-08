@@ -7,9 +7,6 @@
 		trusted-users = [ "root" "@wheel" ];
 	};
 
-	# system packages
-	environment.systemPackages = with pkgs; [ git neovim ];
-
 	# user config
 	users.users.victor = {
 		isNormalUser = true;
@@ -24,7 +21,6 @@
 	# bootloader config
 	boot.loader = {
 		systemd-boot = {
-			# enable = true;
 			enable = lib.mkForce false;
 			consoleMode = "max";
 		};
@@ -74,11 +70,11 @@
 
 	# font config
 	fonts.packages = with pkgs; [
+		nerd-fonts.jetbrains-mono
+		nerd-fonts.ubuntu
+		nerd-fonts.ubuntu-mono
 		noto-fonts
 		noto-fonts-cjk-sans
-		nerd-fonts.jetbrains-mono
-		nerd-fonts.ubuntu-mono
-		nerd-fonts.ubuntu
 	];
 
 	# misc config
@@ -87,6 +83,7 @@
 	programs.dconf.enable = true;
 	security.polkit.enable = true;
 	services.printing.enable = true;
+	services.blueman.enable = true;
 	hardware.bluetooth.enable = true;
 	hardware.bluetooth.powerOnBoot = true;
 	hardware.graphics.extraPackages = with pkgs; [ rocmPackages.clr.icd ];

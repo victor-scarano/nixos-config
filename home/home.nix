@@ -1,23 +1,22 @@
 { pkgs, inputs, ... }: {
 	imports = [ inputs.neovim.homeModules.default ];
 
-	home = {
-		username = "victor";
-		homeDirectory = "/home/victor";
-	};
-
 	home.packages = with pkgs; [
-		btop
+		audacity
+		cloc
 		discord-canary
 		fastfetch
 		fzf
+		gimp3
 		google-chrome
-		libreoffice
+		nemo
+		obs-studio
 		spotify
-		tree
 		tmux
 		vlc
 		unzip
+		wireplumber
+		zoom-us
 	];
 
 	programs.git = {
@@ -43,6 +42,7 @@
 	neovim = {
 		enable = true;
 		languages = {
+			c.enable = true;
 			lua.enable = true;
 			markdown.enable = true;
 			nix.enable = true;

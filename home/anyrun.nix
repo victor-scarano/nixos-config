@@ -47,5 +47,18 @@
 				font-size: 14px;
 			}
 		'';
+		extraConfigFiles."applications.ron".text = ''
+			Config(
+				desktop_actions: false,
+				max_entries: 10,
+				// A command to preprocess the command from the desktop file. The commands should take arguments in this order:
+				// command_name <term|no-term> <command>
+				// preprocess_exec_script: Some("/home/user/.local/share/anyrun/preprocess_application_command.sh")
+				terminal: Some(Terminal(
+					command: "ghostty",
+					args: "-e {}",
+				)),
+			)
+		'';
 	};
 }

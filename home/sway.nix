@@ -1,18 +1,25 @@
 { lib, config, pkgs, ... }: {
+	home.packages = with pkgs; [ grim slurp wl-clipboard ];
+
 	home.pointerCursor = {
-		sway.enable = true;
-		gtk.enable = true;
+		# NOTE: <package>/share/icons/<theme>/cursors
+		name = "Breeze_Light"; # breeze_cursors or Breeze_Light
+		package = pkgs.kdePackages.breeze;
 		size = 32;
-		name = "Breeze";
-		package = pkgs.kdePackages.breeze-icons; # is there a way to use the plasma 5 theme?
+		sway.enable = true;
+		gtk.enable = true; # does kdePackages.breeze-icons work if this is enabled?
 	};
 
-	home.packages = with pkgs; [ grim slurp swaybg wl-clipboard ];
+	gtk = {
+		enable = true;
+		theme = {
+			name = "Adwaita-dark";
+			package = pkgs.gnome-themes-extra;
+		};
+	};
 
-	# TODO: configure gtk themes
-	# TODO: configure cursor themes
-	# TODO: swap h/l resize keybinds
 	wayland.windowManager.sway = {
+		# TODO: swap h/l resize keybinds
 		enable = true;
 		extraOptions = [ "--unsupported-gpu" ];
 		checkConfig = true;
@@ -38,7 +45,6 @@
 				}
 			];
 			keybindings = let mod = config.wayland.windowManager.sway.config.modifier; in lib.mkOptionDefault {
-				"${mod}+q" = "kill";
 				"${mod}+Shift+s" = "exec grim -g \"$(slurp -d)\" - | wl-copy";
 			};
 			window.titlebar = false;
@@ -49,9 +55,8 @@
 		};
 	};
 
-	# should i be using i3status-rust?
-	# i3blocks?
 	programs.i3status = {
+		# i3blocks?
 		enable = true;
 		enableDefault = false;
 		general.separator = " | "; # TODO: fix the missing spaces
