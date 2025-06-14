@@ -17,11 +17,11 @@
 			package = pkgs.gnome-themes-extra;
 		};
 	};
+	# TODO: Qt
 
 	wayland.windowManager.sway = {
 		# TODO: swap h/l resize keybinds
 		enable = true;
-		extraOptions = [ "--unsupported-gpu" ];
 		checkConfig = true;
 		swaynag.enable = true;
 		systemd.enable = true;
@@ -35,13 +35,13 @@
 			};
 			workspaceOutputAssign = [
 				{ output = "DP-2"; workspace = "1"; }
-				{ output = "DP-3"; workspace = "4"; }
+				{ output = "DP-3"; workspace = "5"; }
 			];
 			fonts = { names = [ "UbuntuMono Nerd Font" ]; size = 14.0; };
 			bars = [
 				{
 					fonts = { names = [ "UbuntuMono Nerd Font" ]; size = 14.0; };
-					statusCommand = "i3status";
+					statusCommand = "i3status-rs";
 				}
 			];
 			keybindings = let mod = config.wayland.windowManager.sway.config.modifier; in lib.mkOptionDefault {
@@ -56,8 +56,7 @@
 	};
 
 	programs.i3status = {
-		# i3blocks?
-		enable = true;
+		enable = false;
 		enableDefault = false;
 		general.separator = " | "; # TODO: fix the missing spaces
 		modules = {
@@ -66,8 +65,24 @@
 			# TODO: add power/login button
 			time = {
 				position = 1; # starts at 0
-				settings.format = "%b %-d %-I:%M %p";
+				settings.format = "%a %b %-d %-I:%M %p";
 			};
 		};
+	};
+
+	# for some reason, i3status-rust writes the config file to config-default.toml rather than config.toml
+	# https://github.com/nix-community/home-manager/blob/79dfd9aa295e53773aad45480b44c131da29f35b/modules/programs/i3status-rust.nix#L251-L256
+	programs.i3status-rust = {
+		enable = true;
+		bars.default.blocks = [
+			# TODO: custom menu for power options
+			# TODO: keyboard layout options
+			{ block = "sound"; }
+			{
+				block = "time";
+				format = "$timestamp.datetime(f:'%a, %b %-d, %-I:%M %p')";
+				interval = 30;
+			}
+		];
 	};
 }
